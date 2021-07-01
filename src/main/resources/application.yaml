@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: local
+  thymeleaf.cache: false
+  datasource:
+    url: jdbc:h2:mem:testdb
+server:
+  port: 8080
+---
+spring:
+  thymeleaf.cache: false
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:h2:tcp://localhost:9090/mem:testdb
+    username: sa
+    password:
+  redis:
+    host: localhost
+    port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: none
+server:
+  port: 8081
+logging:
+  level:
+    root: INFO
+---
+spring:
+  thymeleaf.cache: true
+  config:
+    activate:
+      on-profile: prod
+logging:
+  level:
+    root: WARN
